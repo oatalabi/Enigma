@@ -3,7 +3,7 @@ require './encryptfile'
 
 describe EncryptFile do
 
-  it "decrypts a meassage using key and date" do
+  it "encrypts a meassage using key and date" do
     @e = EncryptFile.new
     text = "testing..end.."
 
