@@ -1,2 +1,2 @@
 # Enigma
-File Encryption
+This is a tool for cracking an encryption algorithm
