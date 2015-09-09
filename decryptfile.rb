@@ -1,20 +1,20 @@
 require_relative 'helper.rb'
 require_relative 'fileopen.rb'
-require_relative 'write.rb'
+require_relative 'filewrite.rb'
 require_relative 'decrypt.rb'
 
 class DecryptFile
 include ::Enigma::Helper
   def initialize
     @decrypt = Decrypt.new
-    @open = FileOpen.new
-    @write = FileWrite.new
+    @file_open = FileOpen.new
+    @write_into_file = FileWrite.new
   end
 
-  def decrypt(filename, newfilename, key, date)
-    text = @open.read(filename)
+  def decrypt_file(filename, newfilename, key, date)
+    text = @file_open.read_message(filename)
     decrypted = @decrypt.decrypt_message(text, key, date)
-      file = @write.into(newfilename, "#{decrypted} with key #{key}")
+      file = @write_into_file.write_message(newfilename, "#{decrypted} with key #{key}")
       put_message("Created '#{file}' with the key #{key} and date #{date}")
   end
 end

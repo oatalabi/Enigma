@@ -1,6 +1,6 @@
 require_relative 'helper.rb'
 require_relative 'fileopen.rb'
-require_relative 'write.rb'
+require_relative 'filewrite.rb'
 require_relative 'encrypt.rb'
 require_relative 'today.rb'
 
@@ -8,17 +8,17 @@ class EncryptFile
 include ::Enigma::Helper
   def initialize
     @encrypt = Encrypt.new
-    @open = FileOpen.new
-    @write = FileWrite.new
+    @file_open = FileOpen.new
+    @write_into_file = FileWrite.new
     @today = Today.new
   end
 
   def encrypt_file(filename, newfilename)
     key = rand(10000..99999).to_s
-    text = @open.read(filename)
+    text = @file_open.read_message(filename)
     date = @today.date
     encrypted =  @encrypt.encrypt_message(text, key, date)
-    file = @write.into(newfilename, encrypted)
+    file = @write_into_file.write_message(newfilename, encrypted)
     put_message("Created '#{file}' with the key #{key} and date #{date}")
   end
 end

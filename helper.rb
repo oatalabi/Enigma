@@ -5,7 +5,7 @@ module Enigma
     end
 
     def put_message(text)
-       send_message(text)
+      send_message(text)
     end  
   end 
 end

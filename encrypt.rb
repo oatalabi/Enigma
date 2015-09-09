@@ -1,28 +1,27 @@
-require_relative 'encrypt_key.rb'
+require_relative 'rotator_generator.rb'
 require_relative 'cipher.rb'
 
 class Encrypt
   def initialize
-    @transform = Encrypt_key.new
+    @rotator_generator = RotatorGenerator.new
     @cipher_rotate = CipherRotation.new
   end
 
   def encrypt_message(string, key, date)
     letters = string.downcase.split("")
     index = 0
-    rotation = @transform.rotation(key, date)
+    rotation_array = @rotator_generator.rotator(key, date)
     results = []
-    for x in letters
+    for letter in letters
       index = 0 if index > 3
-      rot = (@cipher_rotate.cipher(rotation[index])[x])
-      if rot
-        results << rot
+      rotated_letter = (@cipher_rotate.cipher(rotation_array[index])[letter])
+      if rotated_letter
+        results << rotated_letter
       else
-        results << x
+        results << letter
       end
       index +=1
     end
     results.join
   end
-
 end

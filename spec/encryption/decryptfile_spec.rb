@@ -13,7 +13,7 @@ describe DecryptFile do
     file.write(text)
     file.close
 
-    @e.decrypt("encrypted.txt", "decrypted.txt", key, date)
+    @e.decrypt_file("encrypted.txt", "decrypted.txt", key, date)
     expect(File.exist?("decrypted.txt")).to be true 
     expect(File.open("decrypted.txt", "r").read).to eql("testing..end.. with key 72955")
     File.delete('decrypted.txt')
